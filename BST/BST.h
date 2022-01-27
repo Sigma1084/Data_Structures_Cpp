@@ -44,7 +44,7 @@ struct BST_Node {
         else
             rightWeight = right->weight;
 
-        this->weight = leftWeight + rightWeight;
+        this->weight = leftWeight + rightWeight + 1;
     }
 };
 
@@ -64,6 +64,33 @@ private:
             currNode->weight += val;
             currNode = currNode->parent;
         }
+    }
+
+    void privatePrintWeights(BST_Node<T> *node, std::string pre = "") {
+        std::cout << pre;
+
+        if (node == nullptr) {
+            std::cout << '-' << " ";
+            return;
+        }
+        std::cout << node->weight << "  ";
+
+        if (node->hasLeft())
+            std::cout << node->left->weight << " ";
+        else
+            std::cout << '-' << " ";
+
+        if (node->hasRight())
+            std::cout << node->right->weight << " ";
+        else
+            std::cout << '-' << " ";
+
+        std::cout << "\n";
+
+        if (node->left != nullptr && !node->left->isLeaf())
+            privatePrintWeights(node->left, pre + "    ");
+        if (node->right != nullptr && !node->right->isLeaf())
+            privatePrintWeights(node->right, pre + "    ");
     }
 
     void privatePrintTree(BST_Node<T> *node, std::string pre = "") {
@@ -105,7 +132,7 @@ private:
 
     // Insertions
 
-    void makeRootNode(BST_Node<T> *newNode) {
+    virtual void makeRootNode(BST_Node<T> *newNode) {
         root = newNode;
     }
 
@@ -132,8 +159,8 @@ private:
             makeLeafNode(currNodePtr, newNode, 1);
         }
 
-            // Now, we know left side is heavier or at the same weight as the right side
-            // Therefore, go to right and insert at the min position
+        // Now, we know left side is heavier or at the same weight as the right side
+        // Therefore, go to right and insert at the min position
         else {
             goRight(currNodePtr);
             goToMin(currNodePtr);
@@ -183,8 +210,8 @@ private:
             goToMax(currNodePtr);
         }
 
-            // Right side is heavier or they have equal weight
-            // Here, we remove one node from right and replace it with the currNode
+        // Right side is heavier or they have equal weight
+        // Here, we remove one node from right and replace it with the currNode
         else {
             goRight(currNodePtr);
             goToMin(currNodePtr);
@@ -215,7 +242,7 @@ private:
         // After handleRemoveInternalNode, currNodePtr is pointing to the node that will be removed
 
         // This is just the reference of the current node and is the node that is removed
-        BST_Node<T> **temp = currNodePtr;
+        BST_Node<T> **nodeToBeDeleted = currNodePtr;
 
 
         // After handling the internalNode
@@ -237,9 +264,8 @@ private:
 
         goUp(currNodePtr);
 
-        delete *temp;
-        *temp = nullptr;
-
+        delete *nodeToBeDeleted;
+        *nodeToBeDeleted = nullptr;
 
         // We are currently at the parent who's child Node was deleted or replaced
 
@@ -264,7 +290,7 @@ protected:
     }
 
 
-    // Function related to insertions
+    // Function related to insertions and is extended
     virtual void makeLeafNode(BST_Node<T> **&currNodePtr, BST_Node<T> *newNode, int status) {
 
         newNode->parent = (*currNodePtr);
@@ -283,7 +309,7 @@ protected:
         }
     }
 
-    // Function related to deletions
+    // Function related to deletions and is extended
     virtual void handleDeletionFrom(BST_Node<T> **&currNodePtr) {
         updateWeights(*currNodePtr, -1);
     }
@@ -347,6 +373,9 @@ public:
     }
 
     void removeIfExists(T data) {
+        if (root == nullptr)
+            return;
+
         int status;
         BST_Node<T> **nearestNodePtr = getNearestNodePtr (data, status);
 
@@ -357,6 +386,9 @@ public:
     }
 
     void remove(T data) {
+        if (root == nullptr)
+            throw std::invalid_argument("Data Not present");
+
         int status;
         BST_Node<T> **nearestNodePtr = getNearestNodePtr (data, status);
 
@@ -370,6 +402,11 @@ public:
         if (root == nullptr)
             return 0;
         return root->weight;
+    }
+
+    void printWeights() {
+        BST_Node<T> *curr = root;
+        privatePrintWeights(curr);
     }
 
     void printTree() {
