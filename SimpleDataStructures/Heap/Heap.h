@@ -207,7 +207,7 @@ namespace DS {
     template<class T>
     class MinHeap : public Heap<T> {
     protected:
-        
+
         // Extending the function
         virtual bool upperFirst(T first, T second) {
             return first < second;
