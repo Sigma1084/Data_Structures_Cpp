@@ -1,9 +1,10 @@
 #include <iostream>
-#include "LinkedList/LinkedList.h"
-#include "DoublyLinkedList/DoublyLinkedList.h"
-#include "Stack/Stack.h"
-#include "Queue/Queue.h"
+//#include "LinkedList/LinkedList.h"
+//#include "DoublyLinkedList/DoublyLinkedList.h"
+//#include "Stack/Stack.h"
+//#include "Queue/Queue.h"
 //#include "BST/BST.h"
+#include "ComplexDataStructures/SimpleGraph/SimpleGraph.h"
 
 
 using namespace std;
@@ -34,13 +35,13 @@ int main() {
 //    dll.insertAt(4, 8);
 //    dll.displayList();
 
-    DS::Stack<int> s;
-    for (int i=1; i<=3; i++)
-        s.push(i);
-    s.display();
-    cout << s.pop() << "\n";
-    s.display();
-    cout << s.peek() << "\n";
+//    DS::Stack<int> s;
+//    for (int i=1; i<=3; i++)
+//        s.push(i);
+//    s.display();
+//    cout << s.pop() << "\n";
+//    s.display();
+//    cout << s.peek() << "\n";
 
     return 0;
 }
