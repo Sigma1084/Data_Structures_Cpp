@@ -43,20 +43,23 @@ An example of a Sample Graph can be found in [SampleGraph.cpp](SampleGraph.cpp)
 
 ```mermaid
 graph LR
-A((V0)) --> B((V1))
-D((V3)) --> A
-B --> C((V2))
-D --> C
-B --> D
-D --> E((V4))
-E --> A
-E --> C
+A((V0)) -- 10 --> B((V1))
+D((V3)) -- 8 --> A
+B -- 7 --> C((V2))
+D -- 5 --> C
+B -- 2 --> D
+D -- 1 --> E((V4))
+E -- 4 --> A
+E -- 3 --> C
 ```
 
 
 ## BFS
 ```cpp
 /*
+ * Description:
+ *  Finds whether a node can be reached from the start node
+ * 
  * @param {int} start: The starting point of BFS;
  * @param {int} end [Optional] [Default = -1]: Terminates if end is reached
  * 
@@ -76,4 +79,42 @@ vi p(n);  // p(v) gives the parent of v in the graph
 bfs(start);
 
 // d and p are now updated after calling bfs and can be accessed
+```
+
+## DFS
+
+
+## Kruskal's Algorithm (Minimum Spanning Tree)
+
+
+## Prim's Algorithm (Minimum Spanning Tree)
+
+
+## Dijkstra's Algorithm
+```cpp
+
+/* 
+ * Description:
+ * Finds the Shortest Path from a given vertex "start" to all the other vertices
+ *  in a weighted graph. (Single Source Shortest Path)
+ * 
+ * @param {int} start: The starting point;
+ * 
+ * After execution
+ * d[v] = INF if v can't be reached from start
+ * d[v]: Minimum distance of v from u
+ * 
+ * p[v] = v IF v = start
+ * p[v] = -1 IF v can't be reached from start
+ * p[v] = u implies u is the parent of u in the shortest distance path from start to v
+ */
+void dijkstra(int start);
+```
+
+```cpp
+vi dist(n, INF);  // dist[v] is the shortest distance of v from s
+vi parent(n, -1);  // parent[v] is the parent of v in the shortest distance path
+bfs(start);
+
+// dist and parent are now updated after calling dijkstra and can be accessed
 ```
