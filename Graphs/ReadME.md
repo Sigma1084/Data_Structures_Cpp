@@ -114,7 +114,32 @@ dfs(start);
 
 
 ## Prim's Algorithm (Minimum Spanning Tree)
+```cpp
+/*
+ * @brief Calculates the minimum spanning tree using Prim's algorithm
+ *
+ * @param {int} start: The starting point of BFS;
+ * @param {int} end [Optional] [Default = -1]: Terminates if end is reached
+ *
+ * After execution
+ * d[v]: Minimum distance of v from u
+ *
+ * p[v] = v IF v = start
+ * p[v] = u implies u is the parent of u in the shortest path from start to v
+ * p[v] = -1 if v can't be reached from start
+ */
+void prims(int start=0);
+```
 
+```cpp
+vector<pair<int, int>> spanEdges;  // In the end gives the edges of Spanning Tree
+vector<bool> visited(n, false);  // Default to false
+int minWeight = -1;
+
+auto prims = [&](int start=0) -> void { ... }
+
+prims();
+```
 
 ## Dijkstra's Algorithm
 ```cpp
