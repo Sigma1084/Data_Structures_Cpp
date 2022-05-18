@@ -8,8 +8,8 @@ struct Node {
     Node (T data): data(data) {};
     ~Node() = default;
 
-    std::ostream &operator << (std::ostream &outFunc) {
-        outFunc << this->data;
+    friend std::ostream &operator << (std::ostream &outFunc, const Node &n) {
+        outFunc << n.data;
         return outFunc;
     }
 
