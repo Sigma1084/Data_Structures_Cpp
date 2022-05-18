@@ -4,11 +4,14 @@
 ## Initial Setup
 ```cpp
 // Defining the notion of Infinity
-#define INF 1000000007
+const int INF = 1000000007;
 
 // For simplicity and will be used throughout
-#define vi vector<int>
-#define vvi vector<vi>
+#define V vector
+typedef V<int> vi;
+typedef V<bool> vb;
+typedef V<vi> vvi;
+typedef pair<int, int> pii;
 
 /*
  * @brief Adds an edge from u to v

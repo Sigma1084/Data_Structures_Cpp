@@ -7,9 +7,12 @@
 #include <algorithm>
 using namespace std;
 
-#define INF 1000000007
-#define vi vector<int>
-#define vvi vector<vi>
+const int INF = 1000000007;
+#define V vector
+typedef V<int> vi;
+typedef V<bool> vb;
+typedef V<vi> vvi;
+typedef pair<int, int> pii;
 
 
 // Prints the Adjacency List (Takes O(m+n))
