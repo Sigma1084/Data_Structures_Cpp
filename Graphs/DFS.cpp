@@ -2,11 +2,11 @@
 // Created by Sig on 28-04-2022.
 //
 
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <queue>
+#include <functional>
+#include <stack>
 using namespace std;
 
 #define INF 1000000007
@@ -56,34 +56,28 @@ int main() {
     }
 
     // Code Here
-    vi d(n, INF);  // d(v) is the distance of v from s
-    vi p(n, -1);  // p(v) gives the parent of v in the BFS Tree
-    auto bfs = [&](int start, int end=-1) -> void {
-        queue<int> Q;
-        Q.push(start);
+
+    vi p(n, -1);  // p[v] gives the parent of v in the DFS Tree
+    auto dfs = [&](int start, int end=-1) -> void {
         p[start] = start;
-        d[start] = 0;
-        while (!Q.empty()) {
-            int u = Q.front();
-            Q.pop();
+        bool ret = false;
+        auto inner = [&](auto &&inner, int u) -> void {
+            if(ret) return;
             for (int v: edgesFrom[u]) {
-                if (d[v] != INF) continue;  // v has already been traversed
-                d[v] = d[u] + 1;
-                p[v] = u;
-                Q.push(v);
-                if (v == end) return;  // We have reached our end
+                if (p[v] == -1) {
+                    p[v] = u;
+                    inner(inner, v);
+                    if (v == end) ret = true;
+                }
+                if (ret) return;
             }
-        }
+        };
+        inner(inner, start);
     };
 
-
     // Example
-
-    bfs(3);
-
-    for (auto di: d)
-        cout << di << " ";
-    cout << "\n";
+    int start = 1;
+    dfs(start);
     for (int pi: p)
         cout << pi << " ";
     cout << "\n";

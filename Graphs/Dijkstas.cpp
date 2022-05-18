@@ -127,7 +127,7 @@ int main() {
     vi parent(n, -1);  // Parent of the vertex in the min distance path
     vi dist(n, INF);  // Distance from start vertex after the end of the algorithm
 
-    auto dijkstra = [&](int start) {
+    auto dijkstra = [&](int start) -> void {
         parent[start] = start;
 
         /*

@@ -11,10 +11,9 @@
 #define vvi vector<vi>
 
 /*
+ * @brief Adds an edge from u to v
  * @param {int} u: Starting vertex of the edge
  * @param {int} v: Ending vertex of the edge
- * 
- * Adds an edge from u to v
  */
 void addEdge(int u, int v);
 ```
@@ -57,8 +56,7 @@ E -- 3 --> C
 ## BFS
 ```cpp
 /*
- * Description:
- *  Finds whether a node can be reached from the start node
+ * @brief Finds whether a node can be reached from the start node
  * 
  * @param {int} start: The starting point of BFS;
  * @param {int} end [Optional] [Default = -1]: Terminates if end is reached
@@ -67,21 +65,49 @@ E -- 3 --> C
  * d[v] = INF if v can't be reached from start
  * d[v]: Minimum distance of v from u
  * 
- * p[v] = v IF v = start OR v can't be reached from start
+ * p[v] = v IF v = start
  * p[v] = u implies u is the parent of u in the shortest path from start to v
+ * p[v] = -1 if v can't be reached from start
  */
 void bfs(int start, int end=-1);
 ```
 
 ```cpp
-vi d(n, INF);  // d(v) is the distance of v from s
-vi p(n);  // p(v) gives the parent of v in the graph
+vi d(n, INF);  // d[v] is the distance of v from s
+vi p(n, -1);  // p[v] gives the parent of v in the graph
+
+auto bfs = [&](int start, int end=-1) -> void { ... }  // Function Definition
+
 bfs(start);
 
 // d and p are now updated after calling bfs and can be accessed
 ```
 
 ## DFS
+```cpp
+/*
+ * @brief Finds whether a node can be reached from the start node
+ *
+ * @param {int} start: The starting point of BFS;
+ * @param {int} end [Optional] [Default = -1]: Terminates if end is reached
+ *
+ * After execution
+ * d[v]: Minimum distance of v from u
+ *
+ * p[v] = v IF v = start
+ * p[v] = u implies u is the parent of u in the shortest path from start to v
+ * p[v] = -1 if v can't be reached from start
+ */
+void dfs(int start, int end=-1);
+```
+
+```cpp
+vi p(n, -1);  // p[v] gives the parent of v in the DFS Tree
+
+auto dfs = [&](int start, int end=-1) -> void { ... }  // Function definition
+
+dfs(start);
+```
 
 
 ## Kruskal's Algorithm (Minimum Spanning Tree)
@@ -92,11 +118,11 @@ bfs(start);
 
 ## Dijkstra's Algorithm
 ```cpp
-
 /* 
- * Description:
- * Finds the Shortest Path from a given vertex "start" to all the other vertices
- *  in a weighted graph. (Single Source Shortest Path)
+ * @brief: Finds the Shortest Path from a given vertex "start" 
+ *  to all the other vertices in a weighted graph. 
+ *  
+ * (Single Source Shortest Path)
  * 
  * @param {int} start: The starting point;
  * 
@@ -106,14 +132,18 @@ bfs(start);
  * 
  * p[v] = v IF v = start
  * p[v] = -1 IF v can't be reached from start
- * p[v] = u implies u is the parent of u in the shortest distance path from start to v
+ * p[v] = u implies u is the parent of u in
+ *        the shortest distance path from start to v
  */
 void dijkstra(int start);
 ```
 
 ```cpp
-vi dist(n, INF);  // dist[v] is the shortest distance of v from s
-vi parent(n, -1);  // parent[v] is the parent of v in the shortest distance path
+vi dist(n, INF);  // Distance from start vertex after the end of the algorithm
+vi parent(n, -1);  // Parent of the vertex in the min distance path
+
+auto dijkstra = [&](int start) -> void { ... };
+
 bfs(start);
 
 // dist and parent are now updated after calling dijkstra and can be accessed

@@ -39,18 +39,24 @@ int main() {
     vvi edgesFrom(n);
     vvi edgesInto(n);
 
+    vvi weightsFrom(n);
+    vvi weightsInto(n);
+
     // Adds a directed edge from u to v
-    auto addEdge = [&](int u, int v) -> void {
+    auto addEdge = [&](int u, int v, int weight=0) -> void {
         edgesFrom[u].push_back(v);
         edgesInto[v].push_back(u);
+        weightsFrom[u].push_back(weight);
+        weightsInto[v].push_back(weight);
     };
 
     // A Block to add all the edges to m
     {
         vector<pair<int, int>> tempEdges = {{0, 1}, {1, 2}, {1, 3}, {3, 0},
                                  {3, 2}, {3, 4}, {4, 0}, {4, 2}};
-        for (auto tempEdge: tempEdges)
-            addEdge(tempEdge.first, tempEdge.second);
+        vi weights = {10, 7, 2, 8, 5, 1, 4, 3};
+        for (int i=0; i<m; i++)
+            addEdge(tempEdges[i].first, tempEdges[i].second, weights[i]);
     }
 
     // Code Here
