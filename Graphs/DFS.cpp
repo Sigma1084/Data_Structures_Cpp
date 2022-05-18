@@ -1,12 +1,10 @@
 //
-// Created by Sig on 28-04-2022.
+// Created by Sig on 18-05-2022.
 //
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <functional>
-#include <stack>
 using namespace std;
 
 #define INF 1000000007
