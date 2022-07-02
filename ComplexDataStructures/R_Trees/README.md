@@ -10,5 +10,6 @@ R-trees are tree data structures used for spatial access methods, i.e., for inde
 
 ## Running the Program 
 `g++ -o out RTrees_raw.cpp`
+
 `./out`
 
